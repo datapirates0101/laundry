@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:laundry/screens/splash_screen.dart';
 import 'package:laundry/widgets/login_button.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class SignUpPage extends StatelessWidget {
+  const SignUpPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,49 +34,23 @@ class LoginPage extends StatelessWidget {
                       fontFamily: 'sfpro',
                     ),
                   ),
-                  const Text(
-                    'Please Log In To Your Account',
-                    style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500),
-                  ),
                   const SizedBox(height: 10),
+                  TextField(
+                    decoration: InputDecoration(labelText: "Name"),
+                  ),
+                  TextField(
+                    decoration: InputDecoration(labelText: "Phone Number"),
+                  ),
                   TextField(
                     decoration: InputDecoration(labelText: "Email"),
                   ),
                   TextField(
                     decoration: InputDecoration(labelText: "Password"),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: const [
-                      Text(
-                        'Forgot Password',
-                        style: TextStyle(color: Colors.grey),
-                      ),
-                    ],
-                  ),
                   const SizedBox(
                     height: 30,
                   ),
-                  LoginButton(onTap: () {}, text: 'Login'),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text(
-                        'or',
-                        style: TextStyle(fontSize: 20),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  LoginButton(onTap: () {}, text: 'Login With OTP'),
+                  LoginButton(onTap: () {}, text: 'SIGN UP'),
                   const SizedBox(
                     height: 30,
                   ),
@@ -85,14 +58,14 @@ class LoginPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text(
-                        "Don't have an account?",
+                        "Alredy have an account?",
                         style: TextStyle(fontSize: 16, fontFamily: 'sfpro'),
                       ),
                       InkWell(
                         splashColor: Colors.transparent,
                         onTap: () {},
                         child: const Text(
-                          'SIGN UP',
+                          'LOGIN',
                           style: TextStyle(
                             fontSize: 16,
                             color: Colors.orange,

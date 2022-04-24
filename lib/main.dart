@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:laundry/screens/login_screen.dart';
+import 'package:laundry/screens/otp_varification.dart';
 import 'package:laundry/screens/signup_screen.dart';
 import 'package:laundry/screens/splash_screen.dart';
 
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: SignUpPage(),
+      home: OtpScreen(),
     );
   }
 }

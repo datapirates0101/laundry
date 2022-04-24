@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:laundry/screens/splash_screen.dart';
 import 'package:laundry/widgets/login_button.dart';
 
 class LoginPage extends StatelessWidget {
@@ -77,9 +78,33 @@ class LoginPage extends StatelessWidget {
                     height: 15,
                   ),
                   LoginButton(onTap: () {}, text: 'Login With OTP'),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        "Don't have an account?",
+                        style: TextStyle(fontSize: 16, fontFamily: 'sfpro'),
+                      ),
+                      InkWell(
+                        splashColor: Colors.transparent,
+                        onTap: () {},
+                        child: const Text(
+                          'SIGN UP',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.orange,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),

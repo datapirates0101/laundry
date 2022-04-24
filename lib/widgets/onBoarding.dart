@@ -47,3 +47,4 @@ class OnboardingCard extends StatelessWidget {
     );
   }
 }
+

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:laundry/screens/login_screen.dart';
+import 'package:laundry/utils/style.dart';
 import 'package:laundry/widgets/onBoarding.dart';
 
 class Onboarding extends StatefulWidget {
@@ -104,12 +105,9 @@ class _OnboardingState extends State<Onboarding> {
                 height: 70,
                 width: 70,
                 margin: const EdgeInsets.only(bottom: 30),
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  gradient: LinearGradient(
-                      colors: [Color(0xfff3953b), Color(0xffe57509)],
-                      stops: [0, 1],
-                      begin: Alignment.topCenter),
+                  gradient: kGradientStyle,
                 ),
                 child: const Icon(
                   Icons.arrow_forward,

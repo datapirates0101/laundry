@@ -23,5 +23,4 @@ OutlineInputBorder outlineInputBorder() {
 
 TextStyle headingStyle =
     const TextStyle(fontSize: 20, fontWeight: FontWeight.w700);
-TextStyle contentStyle =
-    const TextStyle(fontSize: 16);
+TextStyle contentStyle = const TextStyle(fontSize: 16);

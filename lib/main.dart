@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:laundry/screens/home_page.dart';
 import 'package:laundry/screens/home_screen.dart';
 import 'package:laundry/screens/login_screen.dart';
 import 'package:laundry/screens/order_confirm_screen.dart';
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: OrderConfirmation(),
+      home: HomeScreen(),
     );
   }
 }

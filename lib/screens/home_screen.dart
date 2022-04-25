@@ -27,14 +27,21 @@ class _HomeScreenState extends State<HomeScreen> {
     ProfilePage()
   ];
 
+  List<String> appBarText = [
+    'Iron Yard',
+    'TrackOrder',
+    'My Orders',
+    'Profile',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const Text(
-          "IRON YARD",
+        title: Text(
+          appBarText[_selectedIndex],
           style: TextStyle(color: Colors.black),
         ),
         leading: IconButton(

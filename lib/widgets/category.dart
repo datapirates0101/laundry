@@ -8,9 +8,10 @@ Column categoryWidget(String img, String name, bool isActive) {
         height: 70,
         width: 70,
         decoration: BoxDecoration(
-            color: isActive ? null : Colors.grey.withOpacity(0.3),
-            gradient: isActive ? kGradientStyle : null,
-            shape: BoxShape.circle),
+          color: isActive ? null : Colors.grey.withOpacity(0.3),
+          gradient: isActive ? kGradientStyle : null,
+          shape: BoxShape.circle,
+        ),
         child: Center(
           child: Container(
             margin: const EdgeInsets.all(15),

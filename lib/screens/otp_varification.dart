@@ -148,7 +148,7 @@ class _OtpScreenState extends State<OtpScreen> {
                 ),
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.1),
-              LoginButton(text: 'Verify'),
+              LoginButton(widget: Text('Verify')),
               SizedBox(height: MediaQuery.of(context).size.height * 0.15),
               const Text(
                 "Resend OTP",

@@ -1,9 +1,48 @@
 import 'package:flutter/material.dart';
+import 'package:laundry/resources/auth_methods.dart';
+import 'package:laundry/screens/home_screen.dart';
 import 'package:laundry/screens/signup_screen.dart';
+import 'package:laundry/utils/utils.dart';
 import 'package:laundry/widgets/login_button.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  bool isLoading = false;
+
+  login() async {
+    setState(() {
+      isLoading = true;
+    });
+
+    String res = await AuthMethods()
+        .loginUser(emailController.text, passwordController.text);
+
+    setState(() {
+      isLoading = false;
+    });
+
+    if (res == "success") {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => const HomeScreen(),),);
+    } else {
+      showSnakBar(res, context);
+    }
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,10 +83,12 @@ class LoginPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   TextField(
-                    decoration: InputDecoration(labelText: "Email"),
+                    controller: emailController,
+                    decoration: const InputDecoration(labelText: "Email"),
                   ),
                   TextField(
-                    decoration: InputDecoration(labelText: "Password"),
+                    controller: passwordController,
+                    decoration: const InputDecoration(labelText: "Password"),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -61,7 +102,24 @@ class LoginPage extends StatelessWidget {
                   const SizedBox(
                     height: 30,
                   ),
-                  LoginButton(widget: Text('Login')),
+                  InkWell(
+                    onTap: login,
+                    child: LoginButton(
+                      widget: isLoading
+                          ? const CircularProgressIndicator(
+                              color: Colors.white,
+                            )
+                          : const Text(
+                              'Login',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w700,
+                                fontFamily: 'sfpro',
+                              ),
+                            ),
+                    ),
+                  ),
                   const SizedBox(
                     height: 15,
                   ),
@@ -77,7 +135,9 @@ class LoginPage extends StatelessWidget {
                   const SizedBox(
                     height: 15,
                   ),
-                  LoginButton(widget: Text('Login With OTP')),
+                  LoginButton(
+                    widget: Text('Login With OTP'),
+                  ),
                   const SizedBox(
                     height: 30,
                   ),

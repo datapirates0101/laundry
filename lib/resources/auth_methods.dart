@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:laundry/models/user.dart' as model;
 
 class AuthMethods {
@@ -25,9 +24,28 @@ class AuthMethods {
         model.User user =
             model.User(name: name, num: num, email: email, uid: cred.user!.uid);
 
-        await _firestore.collection('users').doc(cred.user!.uid).set(user.toJason());
+        await _firestore
+            .collection('users')
+            .doc(cred.user!.uid)
+            .set(user.toJason());
 
         res = "success";
+      }
+    } catch (e) {
+      res = e.toString();
+    }
+    return res;
+  }
+
+  Future<String> loginUser(String email, String password) async {
+    String res = "Some ";
+    try {
+      if (email.isNotEmpty && password.isNotEmpty) {
+        await _auth.signInWithEmailAndPassword(
+            email: email, password: password);
+        res = "success";
+      } else {
+        res = "Please Enter All Fields";
       }
     } catch (e) {
       res = e.toString();

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:laundry/resources/auth_methods.dart';
 import 'package:laundry/screens/login_screen.dart';
+import 'package:laundry/utils/utils.dart';
 import 'package:laundry/widgets/login_button.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -42,9 +43,14 @@ class _SignUpPageState extends State<SignUpPage> {
       isLoading = false;
     });
     if (res == "success") {
-      print('hurray');
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (contex) => const LoginPage(),
+        ),
+      );
     } else {
-      print("fuck");
+      showSnakBar(res, context);
     }
   }
 

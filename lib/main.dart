@@ -1,6 +1,7 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:laundry/screens/home_page.dart';
-import 'package:laundry/screens/home_screen.dart';
+import 'package:laundry/screens/home_screen.dart';q
 import 'package:laundry/screens/login_screen.dart';
 import 'package:laundry/screens/order_confirm_screen.dart';
 import 'package:laundry/screens/order_page.dart';
@@ -9,7 +10,9 @@ import 'package:laundry/screens/pickup&delivery_screen.dart';
 import 'package:laundry/screens/signup_screen.dart';
 import 'package:laundry/screens/splash_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 

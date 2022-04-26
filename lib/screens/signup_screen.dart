@@ -1,8 +1,52 @@
 import 'package:flutter/material.dart';
+import 'package:laundry/resources/auth_methods.dart';
+import 'package:laundry/screens/login_screen.dart';
 import 'package:laundry/widgets/login_button.dart';
 
-class SignUpPage extends StatelessWidget {
+class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
+
+  @override
+  State<SignUpPage> createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
+  TextEditingController nameController = TextEditingController();
+  TextEditingController numController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  bool isLoading = false;
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    numController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  void signup() async {
+    setState(() {
+      isLoading = true;
+    });
+
+    String res = await AuthMethods().signUpUser(
+      nameController.text,
+      numController.text,
+      emailController.text,
+      passwordController.text,
+    );
+
+    setState(() {
+      isLoading = false;
+    });
+    if (res == "success") {
+      print('hurray');
+    } else {
+      print("fuck");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,21 +80,43 @@ class SignUpPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   TextField(
-                    decoration: InputDecoration(labelText: "Name"),
+                    controller: nameController,
+                    decoration: const InputDecoration(labelText: "Name"),
                   ),
                   TextField(
-                    decoration: InputDecoration(labelText: "Phone Number"),
+                    controller: numController,
+                    decoration:
+                        const InputDecoration(labelText: "Phone Number"),
                   ),
                   TextField(
-                    decoration: InputDecoration(labelText: "Email"),
+                    controller: emailController,
+                    decoration: const InputDecoration(labelText: "Email"),
                   ),
                   TextField(
-                    decoration: InputDecoration(labelText: "Password"),
+                    controller: passwordController,
+                    decoration: const InputDecoration(labelText: "Password"),
                   ),
                   const SizedBox(
                     height: 30,
                   ),
-                  LoginButton(onTap: () {}, text: 'SIGN UP'),
+                  InkWell(
+                    onTap: signup,
+                    child: LoginButton(
+                      widget: isLoading
+                          ? const CircularProgressIndicator(
+                              color: Colors.white,
+                            )
+                          : const Text(
+                              'SIGNUP',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w700,
+                                fontFamily: 'sfpro',
+                              ),
+                            ),
+                    ),
+                  ),
                   const SizedBox(
                     height: 30,
                   ),
@@ -63,7 +129,14 @@ class SignUpPage extends StatelessWidget {
                       ),
                       InkWell(
                         splashColor: Colors.transparent,
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const LoginPage(),
+                            ),
+                          );
+                        },
                         child: const Text(
                           'LOGIN',
                           style: TextStyle(

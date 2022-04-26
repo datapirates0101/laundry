@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:laundry/screens/splash_screen.dart';
+import 'package:laundry/screens/signup_screen.dart';
 import 'package:laundry/widgets/login_button.dart';
 
 class LoginPage extends StatelessWidget {
@@ -61,7 +61,7 @@ class LoginPage extends StatelessWidget {
                   const SizedBox(
                     height: 30,
                   ),
-                  LoginButton(onTap: () {}, text: 'Login'),
+                  LoginButton(widget: Text('Login')),
                   const SizedBox(
                     height: 15,
                   ),
@@ -77,7 +77,7 @@ class LoginPage extends StatelessWidget {
                   const SizedBox(
                     height: 15,
                   ),
-                  LoginButton(onTap: () {}, text: 'Login With OTP'),
+                  LoginButton(widget: Text('Login With OTP')),
                   const SizedBox(
                     height: 30,
                   ),
@@ -90,7 +90,14 @@ class LoginPage extends StatelessWidget {
                       ),
                       InkWell(
                         splashColor: Colors.transparent,
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const SignUpPage(),
+                            ),
+                          );
+                        },
                         child: const Text(
                           'SIGN UP',
                           style: TextStyle(

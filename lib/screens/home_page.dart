@@ -1,8 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:laundry/resources/fetch_time.dart';
 import 'package:laundry/utils/style.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  late DateTime time;
+  bool isAvailable = false;
+
+  @override
+  void initState() {
+    getTimeLogic();
+    super.initState();
+  }
+
+  void getTimeLogic() async {
+    time = await Time().getTime();
+    setState(() {
+      isAvailable = Time().checkTime(time);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -79,7 +102,7 @@ class HomePage extends StatelessWidget {
                 ),
                 Expanded(
                   child: Container(
-                    padding: EdgeInsets.all(30),
+                    padding: const EdgeInsets.all(30),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -89,22 +112,27 @@ class HomePage extends StatelessWidget {
                           style: headingStyle,
                         ),
                         const SizedBox(height: 10),
-                        Container(
-                          decoration: BoxDecoration(
-                            gradient: kGradientStyle,
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(20),
+                        InkWell(
+                          onTap: () {
+                            print(isAvailable);
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              gradient: kGradientStyle,
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(20),
+                              ),
                             ),
-                          ),
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 10,
-                            horizontal: 20,
-                          ),
-                          child: const Text(
-                            "Place Order",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700,
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 10,
+                              horizontal: 20,
+                            ),
+                            child: const Text(
+                              "Place Order",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w700,
+                              ),
                             ),
                           ),
                         ),
@@ -129,12 +157,19 @@ class HomePage extends StatelessWidget {
                       "AVAILABILITY",
                       style: contentStyle,
                     ),
-                    Text(
-                      "  AVAILABLE",
-                      style: contentStyle.copyWith(
-                        color: Colors.green,
-                      ),
-                    ),
+                    isAvailable
+                        ? Text(
+                            "  AVAILABLE",
+                            style: contentStyle.copyWith(
+                              color: Colors.green,
+                            ),
+                          )
+                        : Text(
+                            '  UNAVAILABLE',
+                            style: contentStyle.copyWith(
+                              color: Colors.red,
+                            ),
+                          ),
                   ],
                 ),
                 const SizedBox(
@@ -150,7 +185,7 @@ class HomePage extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(20),
             width: MediaQuery.of(context).size.width,
-            color: Color(0xfff1ffff),
+            color: const Color(0xfff1ffff),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

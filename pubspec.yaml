@@ -38,6 +38,8 @@ dependencies:
   cloud_firestore: ^3.1.13
   firebase_auth: ^3.3.15
   ntp: ^2.0.0
+  flutter_riverpod: ^2.0.0-dev.5
+
 
 dev_dependencies:
   flutter_test:

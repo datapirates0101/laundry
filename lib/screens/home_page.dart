@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:laundry/resources/fetch_time.dart';
+import 'package:laundry/screens/order_page.dart';
 import 'package:laundry/utils/style.dart';
 
 class HomePage extends StatefulWidget {
@@ -11,7 +12,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late DateTime time;
-  bool isAvailable = false;
+  bool isAvailable = true;
 
   @override
   void initState() {
@@ -114,7 +115,12 @@ class _HomePageState extends State<HomePage> {
                         const SizedBox(height: 10),
                         InkWell(
                           onTap: () {
-                            print(isAvailable);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => OrdersPage(),
+                              ),
+                            );
                           },
                           child: Container(
                             decoration: BoxDecoration(

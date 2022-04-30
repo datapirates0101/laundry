@@ -9,7 +9,7 @@ class Time {
   }
 
   bool checkTime(DateTime time) {
-    if (time.hour >= 7 && time.hour <= 20) {
+    if (time.hour >= 7 && time.hour < 20) {
       return true;
     } else {
       return false;

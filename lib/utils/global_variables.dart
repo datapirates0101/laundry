@@ -1,7 +1,61 @@
-import 'package:flutter/material.dart';
-import 'package:laundry/screens/home_page.dart';
-import 'package:laundry/screens/myorder_page.dart';
-import 'package:laundry/screens/profile_pade.dart';
-import 'package:laundry/screens/track_order_page.dart';
+import 'package:laundry/providers/quantity.dart';
 
+Map<String, int> price = {
+  'mtrouserProvider': 5,
+  'mjeansProvider': 6,
+  'mjacketProvider': 7,
+  'mshirtProvider': 4,
+  'mtshirtProvider': 3,
+  'mblaserProvider': 10,
+  'mcoatProvider': 10,
+  'mkurtaProvider': 6,
+  'msweateProvider': 8,
+  'wtrouserProvider': 4,
+  'wjeansProvider': 5,
+  'wjacketProvider': 6,
+  'wshirtProvider': 3,
+  'wtshirtProvider': 2,
+  'wblaserProvider': 9,
+  'wcoatProvider': 9,
+  'wkurtaProvider': 5,
+  'wsweateProvider': 7,
+  'ktrouserProvider': 3,
+  'kjeansProvider': 4,
+  'kjacketProvider': 5,
+  'kshirtProvider': 2,
+  'ktshirtProvider': 1,
+  'kblaserProvider': 8,
+  'kcoatProvider': 8,
+  'kkurtaProvider': 4,
+  'ksweateProvider': 6,
+};
 
+List clothes = [
+  mtrouserProvider,
+  mjeansProvider,
+  mjacketProvider,
+  mshirtProvider,
+  mtshirtProvider,
+  mblaserProvider,
+  mcoatProvider,
+  mkurtaProvider,
+  msweateProvider,
+  wtrouserProvider,
+  wjeansProvider,
+  wjacketProvider,
+  wshirtProvider,
+  wtshirtProvider,
+  wblaserProvider,
+  wcoatProvider,
+  wkurtaProvider,
+  wsweateProvider,
+  ktrouserProvider,
+  kjeansProvider,
+  kjacketProvider,
+  kshirtProvider,
+  ktshirtProvider,
+  kblaserProvider,
+  kcoatProvider,
+  kkurtaProvider,
+  ksweateProvider,
+];

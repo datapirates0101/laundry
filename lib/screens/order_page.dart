@@ -1,18 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:laundry/logic/item_price_cal.dart';
+import 'package:laundry/providers/quantity.dart';
+import 'package:laundry/screens/pickup&delivery_screen.dart';
 import 'package:laundry/utils/style.dart';
 import 'package:laundry/widgets/category.dart';
 import 'package:laundry/widgets/cloth.dart';
+import 'package:laundry/logic/gender_clothList.dart';
 
-class OrdersPage extends StatefulWidget {
+class OrdersPage extends ConsumerStatefulWidget {
   const OrdersPage({Key? key}) : super(key: key);
 
   @override
-  State<OrdersPage> createState() => _OrdersPageState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _OrdersPageState();
 }
 
-class _OrdersPageState extends State<OrdersPage> {
+class _OrdersPageState extends ConsumerState<OrdersPage> {
+  bool isActiveMan = true;
+  bool isActiveWomen = false;
+  bool isActivekid = false;
+  int gender = 0;
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(
+    BuildContext context,
+  ) {
+    int item = ref.watch(itemCountProvider);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -23,12 +36,17 @@ class _OrdersPageState extends State<OrdersPage> {
         ),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios, color: Colors.grey),
-          onPressed: () {},
+          onPressed: () {
+            refreshUi(ref);
+            Navigator.pop(context);
+          },
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.notifications, color: Colors.grey),
-            onPressed: () {},
+            icon: const Icon(Icons.refresh_outlined, color: Colors.grey),
+            onPressed: () {
+              refreshUi(ref);
+            },
           ),
         ],
       ),
@@ -39,26 +57,45 @@ class _OrdersPageState extends State<OrdersPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                categoryWidget('man', 'Man', true),
-                categoryWidget('girl', 'Women', false),
-                categoryWidget('child', 'Kids', false),
-                categoryWidget('oldman', 'Others', false),
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      isActiveWomen = false;
+                      isActivekid = false;
+                      isActiveMan = !isActiveMan;
+                      gender = 0;
+                    });
+                  },
+                  child: categoryWidget('man', 'Man', isActiveMan),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      isActiveMan = false;
+                      isActivekid = false;
+                      isActiveWomen = !isActiveWomen;
+                      gender = 1;
+                    });
+                  },
+                  child: categoryWidget('girl', 'Women', isActiveWomen),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      isActiveMan = false;
+                      isActiveWomen = false;
+                      isActivekid = !isActivekid;
+                      gender = 2;
+                    });
+                  },
+                  child: categoryWidget('child', 'Kids', isActivekid),
+                ),
               ],
             ),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
-                  children: [
-                    clothWidget('cloth1', 'Trouser', '15', context),
-                    clothWidget('cloth2', 'Jeans', '15', context),
-                    clothWidget('cloth3', 'Jackets', '15', context),
-                    clothWidget('cloth4', 'Shirt', '15', context),
-                    clothWidget('cloth5', 'T-Shirt', '15', context),
-                    clothWidget('cloth6', 'Blazer', '15', context),
-                    clothWidget('cloth7', 'Coats', '15', context),
-                    clothWidget('cloth8', 'Kurta', '15', context),
-                    clothWidget('cloth9', 'Sweater', '15', context),
-                  ],
+                  children: whichGenderCloths()[gender],
                 ),
               ),
             ),
@@ -72,13 +109,13 @@ class _OrdersPageState extends State<OrdersPage> {
                       style: headingStyle,
                     ),
                     Text(
-                      '7 Items added',
+                      '${item.toString()} Items added',
                       style: contentStyle,
                     ),
                   ],
                 ),
                 Text(
-                  '\$200',
+                  '\$${ref.watch(priceProvider)}',
                   style: headingStyle,
                 ),
               ],
@@ -87,7 +124,14 @@ class _OrdersPageState extends State<OrdersPage> {
               height: 30,
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const PickupScreen(),
+                  ),
+                );
+              },
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
